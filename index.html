@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questionário - Transporte de Petróleo</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+</head>
+<body>
+    <!-- Card inicial de informações -->
+    <div id="initial-overlay" class="initial-overlay">
+        <div class="initial-card">
+            <div class="initial-icon">📋</div>
+            <h2>Informações sobre a Pesquisa</h2>
+            <div class="initial-content">
+                <p>Este questionário faz parte de um projeto de pesquisa acadêmica desenvolvido por alunos do <strong>Centro de Excelência de Educação em Tempo Integral e Profissional Governador Marcelo Déda Chagas</strong> (CNPJ: 32.776.887/0001-09), na disciplina de Projeto de Aprendizagem Interdisciplinar sob a orientação da professora <strong>Dra. Isabela Souza</strong>.</p>
+                <p>As informações coletadas têm finalidade exclusivamente acadêmica e serão tratadas de forma sigilosa, preservando a identidade dos participantes.</p>
+                <p class="authors-initial"><strong>Trio:</strong> Fernanda, Mirele e Luana</p>
+            </div>
+            <button class="btn-confirm" id="btnConfirm">Confirmo</button>
+        </div>
+    </div>
+
+    <div class="app-wrapper" id="mainContent" style="display: none;">
+        <!-- Sidebar com progresso -->
+        <aside class="sidebar">
+            <div class="sidebar-content">
+                <div class="logo-section">
+                    <h2>Pesquisa</h2>
+                    <p class="subtitle-sidebar">Transporte de Petróleo</p>
+                </div>
+                <div class="progress-section">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <p class="progress-text"><span id="currentQuestion">1</span> de <span id="totalQuestions">15</span></p>
+                </div>
+                <div class="info-sidebar">
+                    <p><strong>Projeto acadêmico</strong></p>
+                    <p>Centro de Excelência Governador Marcelo Déda Chagas</p>
+                    <p class="authors-sidebar">Fernanda, Mirele e Luana</p>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Conteúdo principal -->
+        <main class="main-content">
+            <div class="question-container">
+                <form id="questionarioForm">
+                    <!-- Pergunta 1 -->
+                    <div class="question-slide active" data-question="1">
+                        <div class="question-number">01</div>
+                        <h2 class="question-title">Qual a sua idade?</h2>
+                        <div class="options-grid">
+                            <label class="option-card">
+                                <input type="radio" name="idade" value="Menos de 20 anos" required>
+                                <span class="option-text">Menos de 20 anos</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="radio" name="idade" value="21 a 30 anos">
+                                <span class="option-text">21 a 30 anos</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="radio" name="idade" value="31 a 40 anos">
+                                <span class="option-text">31 a 40 anos</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="radio" name="idade" value="Acima de 40 anos">
+                                <span class="option-text">Acima de 40 anos</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Pergunta 2 -->
+                    <div class="question-slide" data-question="2">
+                        <div class="question-number">02</div>
+                        <h2 class="question-title">Qual o seu cargo/função na empresa?</h2>
+                        <div class="options-grid">
+                            <label class="option-card">
+                                <input type="radio" name="cargo" value="Operacional/Técnico" required>
+                                <span class="option-text">Operacional/Técnico</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="radio" name="cargo" value="Supervisão/Gerência">
+                                <span class="option-text">Supervisão/Gerência</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="radio" name="cargo" value="Engenharia">
+                                <span class="option-text">Engenharia</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="radio" name="cargo" value="Meio Ambiente/Sustentabilidade">
+                                <span class="option-text">Meio Ambiente/Sustentabilidade</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="radio" name="cargo" value="Outro" id="cargo-outro-radio">
+                                <span class="option-text">Outro</span>
+                            </label>
+                            <div class="outro-input-wrapper" id="cargo-outro-wrapper" style="display: none;">
+                                <input type="text" name="cargo-outro" id="cargo-outro-text" placeholder="Especifique seu cargo">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pergunta 3 -->
+                    <div class="question-slide" data-question="3">
+                        <div class="question-number">03</div>
+                        <h2 class="question-title">Há quanto tempo você trabalha no setor de petróleo e gás?</h2>
+                        <div class="options-grid">
+                            <label class="option-card">
+                                <input type="radio" name="tempo-setor" value="Menos de 1 ano" required>
+                                <span class="option-text">Menos de 1 ano</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="radio" name="tempo-setor" value="1 a 3 anos">
+                                <span class="option-text">1 a 3 anos</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="radio" name="tempo-setor" value="4 a 6 anos">
+                                <span class="option-text">4 a 6 anos</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="radio" name="tempo-setor" value="7 a 10 anos">
+                                <span class="option-text">7 a 10 anos</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="radio" name="tempo-setor" value="Mais de 10 anos">
+                                <span class="option-text">Mais de 10 anos</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Pergunta 4 -->
+                    <div class="question-slide" data-question="4">
+                        <div class="question-number">04</div>
+                        <h2 class="question-title">Qual o seu setor de atuação na empresa?</h2>
+                        <div class="options-grid">
+                            <label class="option-card">
+                                <input type="radio" name="setor" value="Transporte produtos" required>
+                                <span class="option-text">Transporte produtos</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="radio" name="setor" value="Exploração e produção">
+                                <span class="option-text">Exploração e produção</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="radio" name="setor" value="Refino">
+                                <span class="option-text">Refino</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="radio" name="setor" value="Comercial/Logística">
+                                <span class="option-text">Comercial/Logística</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="radio" name="setor" value="Meio ambiente/Segurança">
+                                <span class="option-text">Meio ambiente/Segurança</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="radio" name="setor" value="Outro" id="setor-outro-radio">
+                                <span class="option-text">Outro</span>
+                            </label>
+                            <div class="outro-input-wrapper" id="setor-outro-wrapper" style="display: none;">
+                                <input type="text" name="setor-outro" id="setor-outro-text" placeholder="Especifique o setor">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pergunta 5 -->
+                    <div class="question-slide" data-question="5">
+                        <div class="question-number">05</div>
+                        <h2 class="question-title">Você já participou de treinamentos ou capacitações sobre riscos no transporte de petróleo?</h2>
+                        <div class="options-grid options-grid-2">
+                            <label class="option-card">
+                                <input type="radio" name="treinamento" value="Sim" required>
+                                <span class="option-text">Sim</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="radio" name="treinamento" value="Não">
+                                <span class="option-text">Não</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Pergunta 6 -->
+                    <div class="question-slide" data-question="6">
+                        <div class="question-number">06</div>
+                        <h2 class="question-title">Você conhece os principais riscos associados ao transporte de petróleo por dutos?</h2>
+                        <div class="options-grid">
+                            <label class="option-card">
+                                <input type="radio" name="conhecimento-riscos" value="Sim, tenho conhecimento detalhado" required>
+                                <span class="option-text">Sim, tenho conhecimento detalhado</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="radio" name="conhecimento-riscos" value="Apenas parcialmente">
+                                <span class="option-text">Apenas parcialmente</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="radio" name="conhecimento-riscos" value="Não tenho conhecimento">
+                                <span class="option-text">Não tenho conhecimento</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Pergunta 7 -->
+                    <div class="question-slide" data-question="7">
+                        <div class="question-number">07</div>
+                        <h2 class="question-title">Na sua opinião, o transporte de petróleo por dutos representa risco ambiental significativo?</h2>
+                        <div class="options-grid">
+                            <label class="option-card">
+                                <input type="radio" name="risco-ambiental" value="Sim, muito significativo" required>
+                                <span class="option-text">Sim, muito significativo</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="radio" name="risco-ambiental" value="Moderado">
+                                <span class="option-text">Moderado</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="radio" name="risco-ambiental" value="Pouco significativo">
+                                <span class="option-text">Pouco significativo</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="radio" name="risco-ambiental" value="Não representa risco">
+                                <span class="option-text">Não representa risco</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Pergunta 8 -->
+                    <div class="question-slide" data-question="8">
+                        <div class="question-number">08</div>
+                        <h2 class="question-title">Você acredita que a região de Carmópolis-SE apresenta risco maior de vazamentos devido às características geográficas?</h2>
+                        <div class="options-grid">
+                            <label class="option-card">
+                                <input type="radio" name="risco-carmopolis" value="Sim" required>
+                                <span class="option-text">Sim</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="radio" name="risco-carmopolis" value="Não">
+                                <span class="option-text">Não</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="radio" name="risco-carmopolis" value="Não sei">
+                                <span class="option-text">Não sei</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Pergunta 9 -->
+                    <div class="question-slide" data-question="9">
+                        <div class="question-number">09</div>
+                        <h2 class="question-title">Quais destes riscos você considera mais relevantes no transporte de petróleo por dutos? <span class="hint">(pode marcar mais de um)</span></h2>
+                        <div class="options-grid">
+                            <label class="option-card checkbox-card">
+                                <input type="checkbox" name="riscos-relevantes" value="Vazamentos de petróleo">
+                                <span class="option-text">Vazamentos de petróleo</span>
+                            </label>
+                            <label class="option-card checkbox-card">
+                                <input type="checkbox" name="riscos-relevantes" value="Explosões ou incêndios">
+                                <span class="option-text">Explosões ou incêndios</span>
+                            </label>
+                            <label class="option-card checkbox-card">
+                                <input type="checkbox" name="riscos-relevantes" value="Contaminação do solo">
+                                <span class="option-text">Contaminação do solo</span>
+                            </label>
+                            <label class="option-card checkbox-card">
+                                <input type="checkbox" name="riscos-relevantes" value="Contaminação da água">
+                                <span class="option-text">Contaminação da água</span>
+                            </label>
+                            <label class="option-card checkbox-card">
+                                <input type="checkbox" name="riscos-relevantes" value="Danos à fauna e flora local">
+                                <span class="option-text">Danos à fauna e flora local</span>
+                            </label>
+                            <label class="option-card checkbox-card">
+                                <input type="checkbox" name="riscos-relevantes" value="Risco para comunidades próximas">
+                                <span class="option-text">Risco para comunidades próximas</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Pergunta 10 -->
+                    <div class="question-slide" data-question="10">
+                        <div class="question-number">10</div>
+                        <h2 class="question-title">Você acha que os sistemas de monitoramento dos dutos em Carmópolis-SE são suficientes para prevenir acidentes?</h2>
+                        <div class="options-grid">
+                            <label class="option-card">
+                                <input type="radio" name="monitoramento" value="Sim" required>
+                                <span class="option-text">Sim</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="radio" name="monitoramento" value="Não">
+                                <span class="option-text">Não</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="radio" name="monitoramento" value="Não sei">
+                                <span class="option-text">Não sei</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Pergunta 11 -->
+                    <div class="question-slide" data-question="11">
+                        <div class="question-number">11</div>
+                        <h2 class="question-title">Você já presenciou ou teve conhecimento de algum incidente envolvendo dutos na região?</h2>
+                        <div class="options-grid options-grid-2">
+                            <label class="option-card">
+                                <input type="radio" name="incidente" value="Sim" required>
+                                <span class="option-text">Sim</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="radio" name="incidente" value="Não">
+                                <span class="option-text">Não</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Pergunta 12 -->
+                    <div class="question-slide" data-question="12">
+                        <div class="question-number">12</div>
+                        <h2 class="question-title">Na sua opinião, quais medidas seriam mais eficazes para reduzir riscos no transporte de petróleo? <span class="hint">(pode marcar mais de uma)</span></h2>
+                        <div class="options-grid">
+                            <label class="option-card checkbox-card">
+                                <input type="checkbox" name="medidas-eficazes" value="Manutenção preventiva constante">
+                                <span class="option-text">Manutenção preventiva constante</span>
+                            </label>
+                            <label class="option-card checkbox-card">
+                                <input type="checkbox" name="medidas-eficazes" value="Monitoramento por sensores e drones">
+                                <span class="option-text">Monitoramento por sensores e drones</span>
+                            </label>
+                            <label class="option-card checkbox-card">
+                                <input type="checkbox" name="medidas-eficazes" value="Treinamento frequente de equipes de emergência">
+                                <span class="option-text">Treinamento frequente de equipes de emergência</span>
+                            </label>
+                            <label class="option-card checkbox-card">
+                                <input type="checkbox" name="medidas-eficazes" value="Barreiras físicas e isolamento de áreas de risco">
+                                <span class="option-text">Barreiras físicas e isolamento de áreas de risco</span>
+                            </label>
+                            <label class="option-card checkbox-card">
+                                <input type="checkbox" name="medidas-eficazes" value="Campanhas de conscientização para a comunidade">
+                                <span class="option-text">Campanhas de conscientização para a comunidade</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Pergunta 13 -->
+                    <div class="question-slide" data-question="13">
+                        <div class="question-number">13</div>
+                        <h2 class="question-title">Você acha que a população local está bem-informada sobre os riscos do transporte de petróleo produtos?</h2>
+                        <div class="options-grid">
+                            <label class="option-card">
+                                <input type="radio" name="populacao-informada" value="Sim" required>
+                                <span class="option-text">Sim</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="radio" name="populacao-informada" value="Parcialmente">
+                                <span class="option-text">Parcialmente</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="radio" name="populacao-informada" value="Não">
+                                <span class="option-text">Não</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Pergunta 14 -->
+                    <div class="question-slide" data-question="14">
+                        <div class="question-number">14</div>
+                        <h2 class="question-title">A empresa responsável pelo transporte de petróleo possui plano de emergência acessível à população?</h2>
+                        <div class="options-grid">
+                            <label class="option-card">
+                                <input type="radio" name="plano-emergencia" value="Sim" required>
+                                <span class="option-text">Sim</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="radio" name="plano-emergencia" value="Não">
+                                <span class="option-text">Não</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="radio" name="plano-emergencia" value="Não sei">
+                                <span class="option-text">Não sei</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Pergunta 15 -->
+                    <div class="question-slide" data-question="15">
+                        <div class="question-number">15</div>
+                        <h2 class="question-title">Você se sente seguro (a) vivendo próximo a um duto de petróleo em Carmópolis-SE?</h2>
+                        <div class="options-grid">
+                            <label class="option-card">
+                                <input type="radio" name="seguranca" value="Sim" required>
+                                <span class="option-text">Sim</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="radio" name="seguranca" value="Não">
+                                <span class="option-text">Não</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="radio" name="seguranca" value="Mais ou menos">
+                                <span class="option-text">Mais ou menos</span>
+                            </label>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- Navegação -->
+                <div class="navigation">
+                    <button class="nav-btn btn-prev" id="btnPrev" style="display: none;">
+                        <span>←</span> Anterior
+                    </button>
+                    <button class="nav-btn btn-next" id="btnNext">
+                        Próxima <span>→</span>
+                    </button>
+                    <button class="nav-btn btn-submit" id="btnSubmit" style="display: none;">
+                        Enviar
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Mensagem de sucesso -->
+    <div id="success-overlay" class="success-overlay" style="display: none;">
+        <div class="success-content">
+            <div class="success-icon">✓</div>
+            <h2>Questionário enviado com sucesso!</h2>
+            <p>Obrigado por participar da pesquisa. Suas respostas foram salvas.</p>
+        </div>
+    </div>
+
+    <!-- Botão flutuante para dashboard (mobile) -->
+    <button id="mobileDashboardBtn" class="mobile-dashboard-btn" title="Abrir Dashboard">
+        ⚙️
+    </button>
+
+    <!-- Modal de Senha -->
+    <div id="password-overlay" class="password-overlay" style="display: none;">
+        <div class="password-card">
+            <h3>🔐 Acesso Administrativo</h3>
+            <p>Digite a senha para acessar a dashboard:</p>
+            <input type="password" id="passwordInput" class="password-input" placeholder="Senha" autocomplete="off">
+            <div class="password-actions">
+                <button class="btn-password btn-confirm-password" id="btnConfirmPassword">Entrar</button>
+                <button class="btn-password btn-cancel-password" id="btnCancelPassword">Cancelar</button>
+            </div>
+            <p id="passwordError" class="password-error" style="display: none;">Senha incorreta. Tente novamente.</p>
+        </div>
+    </div>
+
+    <!-- Dashboard Escondida -->
+    <div id="dashboard-overlay" class="dashboard-overlay" style="display: none;">
+        <div class="dashboard-content">
+            <div class="dashboard-header">
+                <h2>📊 Dashboard Administrativa</h2>
+                <button class="btn-close-dashboard" id="btnCloseDashboard">✕</button>
+            </div>
+            <div class="dashboard-body">
+                <div class="dashboard-stats">
+                    <div class="stat-card">
+                        <div class="stat-value" id="totalRespostas">0</div>
+                        <div class="stat-label">Total de Respostas</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="taxaConclusao">0%</div>
+                        <div class="stat-label">Taxa de Conclusão</div>
+                    </div>
+                </div>
+                <div class="dashboard-actions">
+                    <button class="btn-dashboard btn-generate-report" id="btnGenerateReport">
+                        📄 Gerar Relatório Completo
+                    </button>
+                    <button class="btn-dashboard btn-end-research" id="btnEndResearch">
+                        🔒 Encerrar Pesquisa
+                    </button>
+                </div>
+                <div class="dashboard-metrics" id="dashboardMetrics">
+                    <!-- Métricas serão inseridas aqui -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
